@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import com.ifisolution.cmsmanagerment.entities.NewsShare;
 
-@Repository("newShareRepository")
-public interface NewsShareRepository extends JpaRepository<NewsShare, Integer> {
-
+@Repository
+public interface NewsShareRepository extends JpaRepository<NewsShare, Integer>{
 	List<NewsShare> findNewsSharesByNewsHeaderId(int id);
+
 }

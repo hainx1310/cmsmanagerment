@@ -11,10 +11,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Setter
-@Getter
-@NoArgsConstructor
 public class NewsShare {
+
 	@Id
 	private int id;
 
@@ -46,4 +44,98 @@ public class NewsShare {
 
 	@Column(name = "to_type")
 	private String toType;
+
+	public NewsShare(){};
+	public NewsShare(int fromDoctorId, int fromUserId, int toDoctorId, int toUserId, String comment, Boolean status, Timestamp createAt, NewsHeader newsHeader, String toType) {
+		this.fromDoctorId = fromDoctorId;
+		this.fromUserId = fromUserId;
+		this.toDoctorId = toDoctorId;
+		this.toUserId = toUserId;
+		this.comment = comment;
+		this.status = status;
+		this.createAt = createAt;
+		this.newsHeader = newsHeader;
+		this.toType = toType;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public int getFromDoctorId() {
+		return fromDoctorId;
+	}
+
+	public int getFromUserId() {
+		return fromUserId;
+	}
+
+	public int getToDoctorId() {
+		return toDoctorId;
+	}
+
+	public int getToUserId() {
+		return toUserId;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public Timestamp getCreateAt() {
+		return createAt;
+	}
+
+	public NewsHeader getNewsHeader() {
+		return newsHeader;
+	}
+
+	public String getToType() {
+		return toType;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setFromDoctorId(int fromDoctorId) {
+		this.fromDoctorId = fromDoctorId;
+	}
+
+	public void setFromUserId(int fromUserId) {
+		this.fromUserId = fromUserId;
+	}
+
+	public void setToDoctorId(int toDoctorId) {
+		this.toDoctorId = toDoctorId;
+	}
+
+	public void setToUserId(int toUserId) {
+		this.toUserId = toUserId;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
+
+	public void setCreateAt(Timestamp createAt) {
+		this.createAt = createAt;
+	}
+
+	public void setNewsHeader(NewsHeader newsHeader) {
+		this.newsHeader = newsHeader;
+	}
+
+	public void setToType(String toType) {
+		this.toType = toType;
+	}
 }
+

@@ -9,8 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.ifisolution.cmsmanagerment.entities.NewsShare;
 import com.ifisolution.cmsmanagerment.repository.NewsShareRepository;
 import com.ifisolution.cmsmanagerment.services.NewsShareServices;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-public class NewsShareServiceImpl implements NewsShareServices {
+@Service
+@Configurable
+@Transactional
+public class NewsShareServiceImpl implements NewsShareServices{
 
 	@Autowired
 	private NewsShareRepository newsShareRepository;
@@ -29,13 +35,13 @@ public class NewsShareServiceImpl implements NewsShareServices {
 
 	@Override
 	public NewsShare findByNewsShareId(int id) {
-		NewsShare newShareResult = newsShareRepository.findById(id).get();
+		NewsShare newShareResult = newsShareRepository.findById(id).orElseThrow(()->new EntityNotFoundException("Not fount"));
 		return newShareResult;
 	}
 
 	@Override
 	public List<NewsShare> findByNewsHeaderId(int id) {
-		if (newsShareRepository.findNewsSharesByNewsHeaderId(id).size() == 0) {
+		if(newsShareRepository.findNewsSharesByNewsHeaderId(id).size() == 0) {
 			throw new EntityNotFoundException("Not fount");
 		}
 		return newsShareRepository.findNewsSharesByNewsHeaderId(id);
@@ -43,14 +49,13 @@ public class NewsShareServiceImpl implements NewsShareServices {
 
 	@Override
 	public void deleteById(int id) {
-		newsShareRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Not fount"));
+		newsShareRepository.findById(id).orElseThrow(()->new EntityNotFoundException("Not fount"));
 		newsShareRepository.deleteById(id);
 	}
 
 	@Override
 	public NewsShare update(int id, NewsShare newsShare) {
-		NewsShare newsShareOpt = newsShareRepository.findById(id)
-				.orElseThrow(() -> new EntityNotFoundException("Not fount"));
+		NewsShare newsShareOpt = newsShareRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Not fount"));
 		newsShareOpt.setFromDoctorId(newsShare.getFromDoctorId());
 		newsShareOpt.setFromUserId(newsShare.getFromUserId());
 		newsShareOpt.setToDoctorId(newsShare.getToDoctorId());
