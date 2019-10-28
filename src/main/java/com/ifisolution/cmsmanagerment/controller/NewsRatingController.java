@@ -14,41 +14,41 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ifisolution.cmsmanagerment.entities.NewsRating;
-import com.ifisolution.cmsmanagerment.services.impl.NewsRatingServiceImpl;
+import com.ifisolution.cmsmanagerment.services.NewsRatingService;
 
 @RestController
 @RequestMapping("/api/news/rating")
 public class NewsRatingController {
 	@Autowired
-	NewsRatingServiceImpl newsRatingServiceImpl;
+	NewsRatingService newsRatingService;
 
 	@GetMapping("")
 	public ResponseEntity<List<NewsRating>> getAll() {
-		List<NewsRating> list = newsRatingServiceImpl.getAll();
+		List<NewsRating> list = newsRatingService.getAll();
 		return new ResponseEntity<List<NewsRating>>(list, HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Object> getById(@PathVariable int id) {
-		NewsRating newsRating = newsRatingServiceImpl.getById(id);
+		NewsRating newsRating = newsRatingService.getById(id);
 		return new ResponseEntity<Object>(newsRating, HttpStatus.OK);
 	}
 
 	@PostMapping("")
 	public ResponseEntity<Object> create(@RequestBody NewsRating newsRating) {
-		NewsRating newsRatingTemp = newsRatingServiceImpl.create(newsRating);
+		NewsRating newsRatingTemp = newsRatingService.create(newsRating);
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 
 	@PostMapping("")
 	public ResponseEntity<Object> update(@RequestBody NewsRating newsRating) {
-		NewsRating newsRatingTemp = newsRatingServiceImpl.update(newsRating);
+		NewsRating newsRatingTemp = newsRatingService.update(newsRating);
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Object> delete(@PathVariable int id) {
-		ResponseEntity<Object> respone = newsRatingServiceImpl.delete(id);
+		ResponseEntity<Object> respone = newsRatingService.delete(id);
 		return respone;
 	}
 }
