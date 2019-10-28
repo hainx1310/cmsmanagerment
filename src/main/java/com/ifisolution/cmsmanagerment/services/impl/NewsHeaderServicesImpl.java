@@ -55,7 +55,7 @@ public class NewsHeaderServicesImpl implements NewsHeaderServices {
 		newsHeader.setNewsStatus(newsStatus);
 		newsHeader.setNumberViewers(newsHeaderDTO.getNumberViewers());
 		newsHeader.setHighlightLevel(newsHeaderDTO.getHighlightLevel());
-		newsHeader.setType(newsHeader.getType());
+		newsHeader.setType(newsHeaderDTO.getType());
 		newsHeader.setCreatedDate(new Timestamp(new Date().getTime()));
 
 		return this.newsHeaderRepository.save(newsHeader);
