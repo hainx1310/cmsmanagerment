@@ -44,7 +44,7 @@ public class NewsComment {
 	private boolean statusPublish;
 
 	@ManyToOne
-	@JoinColumn(name = "new_id", referencedColumnName = "id")
+	@JoinColumn(name = "news_id", referencedColumnName = "id")
 	private NewsHeader newsHeader;
 
 	public int getId() {

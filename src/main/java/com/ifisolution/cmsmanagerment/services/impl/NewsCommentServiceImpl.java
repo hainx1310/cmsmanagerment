@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
 
 import com.ifisolution.cmsmanagerment.entities.NewsComment;
+import com.ifisolution.cmsmanagerment.entities.NewsHeader;
 import com.ifisolution.cmsmanagerment.repository.NewsCommentRepository;
+import com.ifisolution.cmsmanagerment.repository.NewsHeaderRepository;
 import com.ifisolution.cmsmanagerment.services.NewsCommentService;
 
 @Service
@@ -21,9 +23,14 @@ public class NewsCommentServiceImpl implements NewsCommentService {
 	@Autowired
 	private NewsCommentRepository newsCommentRepository;
 
+	@Autowired
+	private NewsHeaderRepository newsHeaderRepository;
+
 	@Override
 	public NewsComment add(NewsComment newsComment) {
-
+		NewsHeader currentNewsHeader = newsHeaderRepository.findById(newsComment.getNewsHeader().getId())
+				.orElseThrow(() -> new EntityNotFoundException("Not found NewsHeader"));
+		newsComment.setNewsHeader(currentNewsHeader);
 		return newsCommentRepository.save(newsComment);
 	}
 
@@ -35,7 +42,9 @@ public class NewsCommentServiceImpl implements NewsCommentService {
 		currentcomment.setDoctorId(newsComment.getDoctorId());
 		currentcomment.setEmail(newsComment.getEmail());
 		currentcomment.setName(newsComment.getName());
-		currentcomment.setNewsHeader(newsComment.getNewsHeader());
+		NewsHeader currentNewsHeader = newsHeaderRepository.findById(newsComment.getNewsHeader().getId())
+				.orElseThrow(() -> new EntityNotFoundException("Not found NewsHeader"));
+		newsComment.setNewsHeader(currentNewsHeader);
 		currentcomment.setStatusPublish(newsComment.isStatusPublish());
 		currentcomment.setTypeMember(newsComment.getTypeMember());
 		currentcomment.setUserId(newsComment.getUserId());
@@ -53,7 +62,7 @@ public class NewsCommentServiceImpl implements NewsCommentService {
 
 	@Override
 	public List<NewsComment> getCommentByHeaderId(int id) {
-		if (newsCommentRepository.getCommentsByHeaderId(id).size() == 0) {
+		if (newsCommentRepository.getCommentsByHeaderId(id) == null) {
 			throw new EntityNotFoundException("There are no comments for this article");
 		}
 		return newsCommentRepository.getCommentsByHeaderId(id);
