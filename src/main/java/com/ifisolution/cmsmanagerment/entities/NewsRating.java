@@ -38,7 +38,7 @@ public class NewsRating {
 	}
 
 	public NewsRating(int id, int doctorId, int userId, String typeMember, String name, String email, int status,
-			Timestamp createAt, int newsId) {
+			Timestamp createAt, NewsHeader newsId) {
 		super();
 		this.id = id;
 		this.doctorId = doctorId;
@@ -48,7 +48,7 @@ public class NewsRating {
 		this.email = email;
 		this.status = status;
 		this.createdAt = createAt;
-		this.newsId = newsId;
+		this.newsHeader = newsId;
 	}
 
 	public int getId() {
@@ -115,11 +115,11 @@ public class NewsRating {
 		this.createdAt = createAt;
 	}
 
-	public int getNewsId() {
-		return newsId;
+	public NewsHeader getNewsId() {
+		return this.newsHeader;
 	}
 
-	public void setNewsId(int newsId) {
-		this.newsId = newsId;
+	public void setNewsId(NewsHeader newsId) {
+		this.newsHeader = newsId;
 	}
 }
