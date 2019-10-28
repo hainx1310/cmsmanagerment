@@ -16,16 +16,16 @@ public class NewsStatus {
 
 	@Id
 	private int id;
-	@Column
+	@Column(name="code")
 	private String code;
-	@Column
+	@Column(name="name")
 	private String name;
-	@Column
+	@Column(name="desciption")
 	private String desciption;
 
 	// one to many "cms_news-status"
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cms_news_status")
-	private List<NewsHeader> listStatus = new ArrayList<>();
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "newsStatus")
+	private List<NewsHeader> newsStatus = new ArrayList<>();
 
 	//
 	public int getId() {
@@ -59,4 +59,14 @@ public class NewsStatus {
 	public void setDesciption(String desciption) {
 		this.desciption = desciption;
 	}
+
+	public List<NewsHeader> getNewsStatus() {
+		return newsStatus;
+	}
+
+	public void setNewsStatus(List<NewsHeader> newsStatus) {
+		this.newsStatus = newsStatus;
+	}
+	
+	
 }

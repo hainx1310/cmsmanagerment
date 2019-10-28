@@ -33,7 +33,7 @@ public class Topic {
 
 	// one to many "cms_news_header"
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "topic")
-	private List<NewsHeader> newsheader = new ArrayList<>();
+	private List<NewsHeader> newsHeader = new ArrayList<>();
 
 	public int getId() {
 		return id;
@@ -75,12 +75,12 @@ public class Topic {
 		this.listTopic = listTopic;
 	}
 
-	public List<NewsHeader> getNewsheader() {
-		return newsheader;
+	public List<NewsHeader> getNewsHeader() {
+		return newsHeader;
 	}
 
-	public void setNewsheader(List<NewsHeader> newsheader) {
-		this.newsheader = newsheader;
+	public void setNewsHeader(List<NewsHeader> newsheader) {
+		this.newsHeader = newsheader;
 	}
 
 	

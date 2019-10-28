@@ -12,13 +12,13 @@ import javax.persistence.Table;
 public class NewsContent {
 	@Id
 	private int id;
-	@Column
+	@Column(name="content")
 	private String content;
-	@Column
-	private int newId;
+	@Column(name="news_id")
+	private int newsId;
 	// many to one
 	@ManyToOne()
-	@JoinColumn(name = "newId", referencedColumnName = "id", insertable = false, updatable = false)
+	@JoinColumn(name = "newsId", referencedColumnName = "id", insertable = false, updatable = false)
 	private NewsHeader newsHeader;
 
 	public int getId() {
@@ -37,11 +37,11 @@ public class NewsContent {
 		this.content = content;
 	}
 
-	public int getNewId() {
-		return newId;
+	public int getNewsId() {
+		return newsId;
 	}
 
-	public void setNewId(int newId) {
-		this.newId = newId;
+	public void setNewsId(int newId) {
+		this.newsId = newId;
 	}
 }
