@@ -53,7 +53,7 @@ public class TopicTracking {
 		return topic;
 	}
 
-	public void setTopicId(Topic topic) {
+	public void setTopic(Topic topic) {
 		this.topic = topic;
 	}
 
