@@ -1,12 +1,16 @@
 package com.ifisolution.cmsmanagerment.services.impl;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.ifisolution.cmsmanagerment.entities.NewsHeader;
 import com.ifisolution.cmsmanagerment.entities.NewsShare;
+import com.ifisolution.cmsmanagerment.repository.NewsHeaderRepository;
 import com.ifisolution.cmsmanagerment.repository.NewsShareRepository;
 import com.ifisolution.cmsmanagerment.services.NewsShareServices;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -16,10 +20,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Configurable
 @Transactional
-public class NewsShareServiceImpl implements NewsShareServices{
+public class NewsShareServiceImpl implements NewsShareServices {
 
 	@Autowired
 	private NewsShareRepository newsShareRepository;
+
+	@Autowired
+	private NewsHeaderRepository newsHeaderRepository;
 
 	@Override
 	public List<NewsShare> findAllNewsShare() {
@@ -29,33 +36,45 @@ public class NewsShareServiceImpl implements NewsShareServices{
 
 	@Override
 	public NewsShare create(NewsShare newsShare) {
-		NewsShare newShareResult = newsShareRepository.save(newsShare);
-		return newShareResult;
+		int newsHeaderId = newsShare.getNewsHeader() != null ? newsShare.getNewsHeader().getId() : 0;
+		NewsHeader newsHeader = this.newsHeaderRepository.findById(newsHeaderId)
+				.orElseThrow(() -> new EntityNotFoundException("News Header not found"));
+		newsShare.setNewsHeader(newsHeader);
+		newsShare.setCreateAt(new Timestamp(new Date().getTime()));
+
+		return this.newsShareRepository.save(newsShare);
 	}
 
 	@Override
 	public NewsShare findByNewsShareId(int id) {
-		NewsShare newShareResult = newsShareRepository.findById(id).orElseThrow(()->new EntityNotFoundException("Not fount"));
+		NewsShare newShareResult = newsShareRepository.findById(id)
+				.orElseThrow(() -> new EntityNotFoundException("Not found"));
 		return newShareResult;
 	}
 
 	@Override
 	public List<NewsShare> findByNewsHeaderId(int id) {
-		if(newsShareRepository.findNewsSharesByNewsHeaderId(id).size() == 0) {
-			throw new EntityNotFoundException("Not fount");
+		if (newsShareRepository.findNewsSharesByNewsHeaderId(id) == null) {
+			throw new EntityNotFoundException("Not found");
 		}
 		return newsShareRepository.findNewsSharesByNewsHeaderId(id);
 	}
 
 	@Override
 	public void deleteById(int id) {
-		newsShareRepository.findById(id).orElseThrow(()->new EntityNotFoundException("Not fount"));
+		newsShareRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Not found"));
 		newsShareRepository.deleteById(id);
 	}
 
 	@Override
 	public NewsShare update(int id, NewsShare newsShare) {
-		NewsShare newsShareOpt = newsShareRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Not fount"));
+
+		NewsShare newsShareOpt = newsShareRepository.findById(id)
+				.orElseThrow(() -> new EntityNotFoundException("News Share not found"));
+		int newsHeaderId = newsShare.getNewsHeader() != null ? newsShare.getNewsHeader().getId() : 0;
+		NewsHeader newsHeader = this.newsHeaderRepository.findById(newsHeaderId)
+				.orElseThrow(() -> new EntityNotFoundException("News Header not found"));
+
 		newsShareOpt.setFromDoctorId(newsShare.getFromDoctorId());
 		newsShareOpt.setFromUserId(newsShare.getFromUserId());
 		newsShareOpt.setToDoctorId(newsShare.getToDoctorId());
@@ -63,9 +82,8 @@ public class NewsShareServiceImpl implements NewsShareServices{
 		newsShareOpt.setComment(newsShare.getComment());
 		newsShareOpt.setStatus(newsShare.getStatus());
 		newsShareOpt.setCreateAt(newsShare.getCreateAt());
-		newsShareOpt.setNewsHeader(newsShare.getNewsHeader());
-		NewsShare newsShareResult = newsShareRepository.save(newsShareOpt);
-		return newsShareResult;
-	}
+		newsShareOpt.setNewsHeader(newsHeader);
 
+		return this.newsShareRepository.save(newsShareOpt);
+	}
 }
