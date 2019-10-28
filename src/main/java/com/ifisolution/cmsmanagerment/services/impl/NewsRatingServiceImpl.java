@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
 
 import com.ifisolution.cmsmanagerment.entities.NewsRating;
 import com.ifisolution.cmsmanagerment.repository.NewsRatingRepository;
-import com.ifisolution.cmsmanagerment.services.INewsRating;
+import com.ifisolution.cmsmanagerment.services.NewsRatingService;
 
 @Service
-public class NewsRatingService implements INewsRating {
+public class NewsRatingServiceImpl implements NewsRatingService {
 	@Autowired
 	NewsRatingRepository newsRatingRepository;
 
@@ -57,7 +57,7 @@ public class NewsRatingService implements INewsRating {
 			throw new EntityNotFoundException("not found NewsRating with id: " + id);
 		} else {
 			newsRatingRepository.deleteById(id);
-			return new ResponseEntity<Object>("", HttpStatus.ACCEPTED);
+			return new ResponseEntity<Object>("delete NewsRating id: " + id + " successfully", HttpStatus.ACCEPTED);
 		}
 	}
 
