@@ -42,7 +42,6 @@ public class TopicServiceImpl implements TopicService {
 		Optional<Topic> topic2 = topicrepository.findById(id);
 		if (topic2.isPresent()) {
 			throw new EntityNotFoundException("Topic id " + id + " has exist");
-
 		}
 		return topicrepository.save(topic);
 	}
@@ -61,13 +60,20 @@ public class TopicServiceImpl implements TopicService {
 	}
 
 	@Override
-	public ResponseEntity deleteById(Integer Id) {
+	public ResponseEntity<Object> deleteById(Integer Id) {
 		Optional<Topic> topic = topicrepository.findById(Id);
 		if (!topic.isPresent()) {
 			throw new EntityNotFoundException("Not Found Topic with id " + Id);
 		}
+		Topic topicTracking = topic.get();
+		if(!topicTracking.getListTopic().isEmpty()) {
+			throw new EntityNotFoundException("Topic Tracking not Empty is Topic Id" + Id);
+		}
+		if(!topicTracking.getNewsHeader().isEmpty()) {
+			throw new EntityNotFoundException("News Header not Empty is Topic Id" + Id);
+		}
 		topicrepository.deleteById(Id);
-		return new ResponseEntity("Student id " + Id + " has been deleted", HttpStatus.OK);
+		return new ResponseEntity<Object>("Student id " + Id + " has been deleted", HttpStatus.OK);
 	}
 
 }

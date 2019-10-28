@@ -62,13 +62,13 @@ public class NewsStatusServiceImpl implements NewsStatusService {
 	}
 
 	@Override
-	public ResponseEntity deleteById(Integer Id) {
+	public ResponseEntity<Object> deleteById(Integer Id) {
 		Optional<NewsStatus> newsStatus = newsstatusrepository.findById(Id);
 		if (!newsStatus.isPresent()) {
 			throw new EntityNotFoundException("Not Found Status with id " + Id);
 		}
 		newsstatusrepository.deleteById(Id);
-		return new ResponseEntity("Status id " + Id + " has been deleted", HttpStatus.OK);
+		return new ResponseEntity<Object>("Status id " + Id + " has been deleted", HttpStatus.OK);
 	}
 
 }
