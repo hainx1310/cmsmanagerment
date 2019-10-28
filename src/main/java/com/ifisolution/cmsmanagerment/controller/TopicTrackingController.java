@@ -12,14 +12,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ifisolution.cmsmanagerment.dto.TopicTrackingModel;
 import com.ifisolution.cmsmanagerment.entities.Topic;
 import com.ifisolution.cmsmanagerment.entities.TopicTracking;
+import com.ifisolution.cmsmanagerment.services.TopicService;
+import com.ifisolution.cmsmanagerment.services.TopicTrackingServices;
 import com.ifisolution.cmsmanagerment.services.impl.TopicServiceImpl;
 import com.ifisolution.cmsmanagerment.services.impl.TopicTrackingServicesImpl;
 
 @RestController
 public class TopicTrackingController {
 	@Autowired
-	TopicTrackingServicesImpl topicTrackingServices;
-	TopicServiceImpl topicServiceImpl;
+	TopicTrackingServices topicTrackingServices;
+	@Autowired
+	TopicService topicServiceImpl;
 
 	@RequestMapping(value = "/topictracking/{id}", //
 			method = RequestMethod.GET, //
@@ -46,13 +49,13 @@ public class TopicTrackingController {
 	@ResponseBody
 	public void insertTopicTracking(@RequestBody TopicTrackingModel topicTrackingModel) {
 		TopicTracking topicTracking = new TopicTracking();
-		Topic topic = topicServiceImpl.findByID(topicTrackingModel.getTopicId());
+		Topic topic = topicServiceImpl.findById(topicTrackingModel.getTopicId());
 		// set data
 		topicTracking.setTopic(topic);
 		topicTracking.setTopicName(topicTrackingModel.getTopicName());
-		topicTracking.setsubTopicName(topicTrackingModel.getSubTopicName());
-		topicTracking.setStatus(topicTrackingModel.getStatus());
-		topicTracking.setCreateAt(topicTrackingModel.getCreataAt());
+		topicTracking.setSubTopicName(topicTrackingModel.getSubTopicName());
+		topicTracking.setStatus(topicTrackingModel.isStatus());
+		topicTracking.setCreateAt(topicTrackingModel.getCreateAt());
 		topicTracking.setDoctorId(topicTrackingModel.getDoctorId());
 		topicTracking.setUserId(topicTrackingModel.getUserId());
 		topicTracking.setTypeMember(topicTrackingModel.getTypeMember());
@@ -66,16 +69,16 @@ public class TopicTrackingController {
 			produces = { MediaType.APPLICATION_JSON_VALUE, //
 					MediaType.APPLICATION_XML_VALUE })
 	@ResponseBody
-	public void updateTopicTracking(@RequestBody TopicTracking topicTracking) {
+	public void updateTopicTracking(@RequestBody TopicTrackingModel topicTrackingModel) {
 		TopicTracking topicTracking = new TopicTracking();
-		Topic topic = topicServiceImpl.findByID(topicTrackingModel.getTopicId());
+		Topic topic = topicServiceImpl.findById(topicTrackingModel.getTopicId());
 		// set data
 		topicTracking.setId(topicTrackingModel.getId());
 		topicTracking.setTopic(topic);
 		topicTracking.setTopicName(topicTrackingModel.getTopicName());
-		topicTracking.setsubTopicName(topicTrackingModel.getSubTopicName());
-		topicTracking.setStatus(topicTrackingModel.getStatus());
-		topicTracking.setCreateAt(topicTrackingModel.getCreataAt());
+		topicTracking.setSubTopicName(topicTrackingModel.getSubTopicName());
+		topicTracking.setStatus(topicTrackingModel.isStatus());
+		topicTracking.setCreateAt(topicTrackingModel.getCreateAt());
 		topicTracking.setDoctorId(topicTrackingModel.getDoctorId());
 		topicTracking.setUserId(topicTrackingModel.getUserId());
 		topicTracking.setTypeMember(topicTrackingModel.getTypeMember());
