@@ -32,7 +32,7 @@ public class NewsRating {
 	private Timestamp createdAt;
 	@ManyToOne
 	@JoinColumn(name = "news_id", nullable = false)
-	private int newsId;
+	private NewsHeader newsHeader;
 
 	public NewsRating() {
 	}
