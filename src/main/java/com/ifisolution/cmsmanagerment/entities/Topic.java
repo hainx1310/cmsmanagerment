@@ -21,19 +21,19 @@ public class Topic {
 	@Column(name="name")
 	private String name;
 
-	@Column
+	@Column(name="parent_ref_id")
 	private int parentRefId;
 
-	@Column
+	@Column(name="create_at")
 	private Timestamp createdAt;
 
 	// one to many "topic_tracking"
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cms_topic")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "topic")
 	private List<TopicTracking> listTopic = new ArrayList<>();
 
 	// one to many "cms_news_header"
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cms_topic")
-	private List<NewsHeader> listNewsHeader = new ArrayList<>();
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "topic")
+	private List<NewsHeader> newsheader = new ArrayList<>();
 
 	public int getId() {
 		return id;
@@ -75,12 +75,14 @@ public class Topic {
 		this.listTopic = listTopic;
 	}
 
-	public List<NewsHeader> getListNewsHeader() {
-		return listNewsHeader;
+	public List<NewsHeader> getNewsheader() {
+		return newsheader;
 	}
 
-	public void setListNewsHeader(List<NewsHeader> listNewsHeader) {
-		this.listNewsHeader = listNewsHeader;
+	public void setNewsheader(List<NewsHeader> newsheader) {
+		this.newsheader = newsheader;
 	}
+
+	
 
 }
