@@ -18,7 +18,7 @@ public class Topic {
 	@Id
 	private int id;
 
-	@Column
+	@Column(name="name")
 	private String name;
 
 	@Column
