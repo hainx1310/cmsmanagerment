@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -21,6 +22,7 @@ import com.ifisolution.cmsmanagerment.services.NewsHeaderServices;
 
 @Service
 @Configurable
+@Transactional
 public class NewsHeaderServicesImpl implements NewsHeaderServices {
 
 	@Autowired
@@ -35,13 +37,11 @@ public class NewsHeaderServicesImpl implements NewsHeaderServices {
 	@Override
 	public NewsHeader createNewsHeader(NewsHeader newsHeader) {
 
-		int topicId = 0;
-		String statusCode = null;
-
-		topicId = newsHeader.getTopic().getId();
+		int topicId = newsHeader.getTopic() != null ? newsHeader.getTopic().getId() : 0;
 		Topic topic = this.topicRepository.findById(topicId)
 				.orElseThrow(() -> new EntityNotFoundException(CommonConstant.TOPIC_NOT_FOUND));
-		NewsStatus newsStatus = this.newsStatusRepository.findByStatusLike(statusCode);
+		String statusCode = newsHeader.getNewsStatus() != null ? newsHeader.getNewsStatus().getCode() : null;
+		NewsStatus newsStatus = this.newsStatusRepository.findNewsStatusByCode(statusCode);
 		if (newsStatus == null) {
 			throw new EntityNotFoundException(CommonConstant.NEWS_STATUS_NOT_FOUND);
 		}
@@ -56,15 +56,13 @@ public class NewsHeaderServicesImpl implements NewsHeaderServices {
 	@Override
 	public NewsHeader updateNewsHeader(int newsHeaderId, NewsHeader newsHeader) {
 
-		int topicId = 0;
-		String statusCode = null;
-
 		NewsHeader newsHeaderFromDB = this.newsHeaderRepository.findById(newsHeaderId)
 				.orElseThrow(() -> new EntityNotFoundException(CommonConstant.NEWS_HEADER_NOT_FOUND));
-		topicId = newsHeader.getTopic().getId();
+		int topicId = newsHeader.getTopic() != null ? newsHeader.getTopic().getId() : 0;
 		Topic topic = this.topicRepository.findById(topicId)
 				.orElseThrow(() -> new EntityNotFoundException(CommonConstant.TOPIC_NOT_FOUND));
-		NewsStatus newsStatus = this.newsStatusRepository.findByStatusLike(statusCode);
+		String statusCode = newsHeader.getNewsStatus() != null ? newsHeader.getNewsStatus().getCode() : null;
+		NewsStatus newsStatus = this.newsStatusRepository.findNewsStatusByCode(statusCode);
 		if (newsStatus == null) {
 			throw new EntityNotFoundException(CommonConstant.NEWS_STATUS_NOT_FOUND);
 		}
