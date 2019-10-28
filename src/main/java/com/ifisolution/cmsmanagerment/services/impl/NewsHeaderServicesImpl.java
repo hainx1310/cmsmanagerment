@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
 
 import com.ifisolution.cmsmanagerment.common.CommonConstant;
+import com.ifisolution.cmsmanagerment.dto.NewsHeaderDTO;
 import com.ifisolution.cmsmanagerment.entities.NewsHeader;
 import com.ifisolution.cmsmanagerment.entities.NewsStatus;
 import com.ifisolution.cmsmanagerment.entities.Topic;
@@ -35,58 +36,65 @@ public class NewsHeaderServicesImpl implements NewsHeaderServices {
 	private NewsStatusRepository newsStatusRepository;
 
 	@Override
-	public NewsHeader createNewsHeader(NewsHeader newsHeader) {
+	public NewsHeader createNewsHeader(NewsHeaderDTO newsHeaderDTO) {
 
-		int topicId = newsHeader.getTopic() != null ? newsHeader.getTopic().getId() : 0;
-		Topic topic = this.topicRepository.findById(topicId)
+		Topic topic = this.topicRepository.findById(newsHeaderDTO.getTopicId())
 				.orElseThrow(() -> new EntityNotFoundException(CommonConstant.TOPIC_NOT_FOUND));
-		String statusCode = newsHeader.getNewsStatus() != null ? newsHeader.getNewsStatus().getCode() : null;
-		NewsStatus newsStatus = this.newsStatusRepository.findNewsStatusByCode(statusCode);
+		NewsStatus newsStatus = this.newsStatusRepository.findNewsStatusByCode(newsHeaderDTO.getStatus());
 		if (newsStatus == null) {
 			throw new EntityNotFoundException(CommonConstant.NEWS_STATUS_NOT_FOUND);
 		}
 
+		NewsHeader newsHeader = new NewsHeader();
+		newsHeader.setTitle(newsHeaderDTO.getTitle());
+		newsHeader.setImage(newsHeaderDTO.getImage());
+		newsHeader.setVideo(newsHeaderDTO.getVideo());
+		newsHeader.setSummary(newsHeaderDTO.getSummary());
 		newsHeader.setTopic(topic);
+		newsHeader.setAuthorId(newsHeaderDTO.getAuthorId());
 		newsHeader.setNewsStatus(newsStatus);
+		newsHeader.setNumberViewers(newsHeaderDTO.getNumberViewers());
+		newsHeader.setHighlightLevel(newsHeaderDTO.getHighlightLevel());
+		newsHeader.setType(newsHeader.getType());
 		newsHeader.setCreatedDate(new Timestamp(new Date().getTime()));
 
 		return this.newsHeaderRepository.save(newsHeader);
 	}
 
 	@Override
-	public NewsHeader updateNewsHeader(int newsHeaderId, NewsHeader newsHeader) {
+	public NewsHeader updateNewsHeader(int newsHeaderId, NewsHeaderDTO newsHeaderDTO) {
 
-		NewsHeader newsHeaderFromDB = this.newsHeaderRepository.findById(newsHeaderId)
+		NewsHeader newsHeader = this.newsHeaderRepository.findById(newsHeaderId)
 				.orElseThrow(() -> new EntityNotFoundException(CommonConstant.NEWS_HEADER_NOT_FOUND));
-		int topicId = newsHeader.getTopic() != null ? newsHeader.getTopic().getId() : 0;
+		int topicId = newsHeaderDTO.getTopicId();
 		Topic topic = this.topicRepository.findById(topicId)
 				.orElseThrow(() -> new EntityNotFoundException(CommonConstant.TOPIC_NOT_FOUND));
-		String statusCode = newsHeader.getNewsStatus() != null ? newsHeader.getNewsStatus().getCode() : null;
+		String statusCode = newsHeaderDTO.getStatus();
 		NewsStatus newsStatus = this.newsStatusRepository.findNewsStatusByCode(statusCode);
 		if (newsStatus == null) {
 			throw new EntityNotFoundException(CommonConstant.NEWS_STATUS_NOT_FOUND);
 		}
 
-		newsHeaderFromDB.setTitle(newsHeader.getTitle());
-		newsHeaderFromDB.setImage(newsHeader.getImage());
-		newsHeaderFromDB.setVideo(newsHeader.getVideo());
-		newsHeaderFromDB.setSummary(newsHeader.getSummary());
-		newsHeaderFromDB.setTopic(topic);
-		newsHeaderFromDB.setAuthorId(newsHeader.getAuthorId());
-		newsHeaderFromDB.setNewsStatus(newsStatus);
-		newsHeaderFromDB.setNumberViewers(newsHeader.getNumberViewers());
-		newsHeaderFromDB.setHighlightLevel(newsHeader.gethighlightLevel());
-		newsHeaderFromDB.setType(newsHeader.getType());
-		newsHeaderFromDB.setLastModifiedDate(new java.sql.Date(new Date().getTime()));
+		newsHeader.setTitle(newsHeaderDTO.getTitle());
+		newsHeader.setImage(newsHeaderDTO.getImage());
+		newsHeader.setVideo(newsHeaderDTO.getVideo());
+		newsHeader.setSummary(newsHeaderDTO.getSummary());
+		newsHeader.setTopic(topic);
+		newsHeader.setAuthorId(newsHeaderDTO.getAuthorId());
+		newsHeader.setNewsStatus(newsStatus);
+		newsHeader.setNumberViewers(newsHeaderDTO.getNumberViewers());
+		newsHeader.setHighlightLevel(newsHeaderDTO.getHighlightLevel());
+		newsHeader.setType(newsHeaderDTO.getType());
+		newsHeader.setLastModifiedDate(new java.sql.Date(new Date().getTime()));
 
-		return this.newsHeaderRepository.save(newsHeaderFromDB);
+		return this.newsHeaderRepository.save(newsHeader);
 	}
 
 	@Override
 	public void deleteNewsHeader(int newsHeaderId) {
-		NewsHeader newsHeader = this.newsHeaderRepository.findById(newsHeaderId)
+		this.newsHeaderRepository.findById(newsHeaderId)
 				.orElseThrow(() -> new EntityNotFoundException(CommonConstant.NEWS_HEADER_NOT_FOUND));
-		this.newsHeaderRepository.deleteById(newsHeader.getId());
+		this.newsHeaderRepository.deleteById(newsHeaderId);
 	}
 
 	@Override

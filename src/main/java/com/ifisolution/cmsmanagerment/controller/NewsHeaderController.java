@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ifisolution.cmsmanagerment.dto.NewsHeaderDTO;
 import com.ifisolution.cmsmanagerment.entities.NewsHeader;
 import com.ifisolution.cmsmanagerment.services.NewsHeaderServices;
 
 @RestController
-@RequestMapping(value = "/news-header")
+@RequestMapping(value = "/api/news-header")
 public class NewsHeaderController {
 
 	@Autowired
@@ -34,14 +35,14 @@ public class NewsHeaderController {
 	}
 
 	@PostMapping(value = "")
-	public ResponseEntity<NewsHeader> createNewsHeader(@RequestBody NewsHeader newsHeader) {
-		return ResponseEntity.ok(this.newsHeaderServices.createNewsHeader(newsHeader));
+	public ResponseEntity<NewsHeader> createNewsHeader(@RequestBody NewsHeaderDTO newsHeaderDTO) {
+		return ResponseEntity.ok(this.newsHeaderServices.createNewsHeader(newsHeaderDTO));
 	}
 
 	@PutMapping(value = "/{newsHeaderId}")
 	public ResponseEntity<NewsHeader> updateNewsHeader(@PathVariable("newsHeaderId") int newsHeaderId,
-			@RequestBody NewsHeader newsHeader) {
-		return ResponseEntity.ok(this.newsHeaderServices.updateNewsHeader(newsHeaderId, newsHeader));
+			@RequestBody NewsHeaderDTO newsHeaderDTO) {
+		return ResponseEntity.ok(this.newsHeaderServices.updateNewsHeader(newsHeaderId, newsHeaderDTO));
 	}
 
 	@DeleteMapping(value = "/{newsHeaderId}")
