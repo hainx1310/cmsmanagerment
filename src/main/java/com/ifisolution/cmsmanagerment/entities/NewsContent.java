@@ -18,7 +18,7 @@ public class NewsContent {
 	private int newsId;
 	// many to one
 	@ManyToOne()
-	@JoinColumn(name = "newsId", referencedColumnName = "id", insertable = false, updatable = false)
+	@JoinColumn(name = "news_id", referencedColumnName = "id", insertable = false, updatable = false)
 	private NewsHeader newsHeader;
 
 	public int getId() {
