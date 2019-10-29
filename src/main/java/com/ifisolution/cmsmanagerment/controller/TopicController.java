@@ -38,12 +38,12 @@ public class TopicController {
 	}
 
 	@PutMapping(value = "/topic/{id}")
-	public Topic updateTopic(@RequestBody Topic topic, @PathVariable Integer Id) {
-		return topicservice.updateTopic(topic, Id);
+	public Topic updateTopic(@RequestBody Topic topic, @PathVariable Integer id) {
+		return topicservice.updateTopic(topic, id);
 	}
 
 	@DeleteMapping(value = "/topic/{id}")
-	public ResponseEntity deleteTopic(@PathVariable Integer Id) {
-		return topicservice.deleteById(Id);
+	public ResponseEntity deleteTopic(@PathVariable Integer id) {
+		return topicservice.deleteById(id);
 	}
 }
