@@ -73,7 +73,7 @@ public class TopicServiceImpl implements TopicService {
 			throw new EntityNotFoundException("News Header not Empty is Topic Id" + Id);
 		}
 		topicrepository.deleteById(Id);
-		return new ResponseEntity<Object>("Student id " + Id + " has been deleted", HttpStatus.OK);
+		return new ResponseEntity<Object>("Topic id " + Id + " has been deleted", HttpStatus.OK);
 	}
 
 }
