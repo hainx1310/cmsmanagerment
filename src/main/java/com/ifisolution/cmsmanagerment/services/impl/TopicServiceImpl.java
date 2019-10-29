@@ -1,5 +1,7 @@
 package com.ifisolution.cmsmanagerment.services.impl;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,6 +45,8 @@ public class TopicServiceImpl implements TopicService {
 		if (topic2.isPresent()) {
 			throw new EntityNotFoundException("Topic id " + id + " has exist");
 		}
+		topic.setCreatedAt(new Timestamp(new Date().getTime()));
+
 		return topicrepository.save(topic);
 	}
 
@@ -56,6 +60,9 @@ public class TopicServiceImpl implements TopicService {
 		if (idUpdate != Id) {
 			throw new EntityNotFoundException("not change id");
 		}
+		Topic stockTopic2 = stockTopic.get();
+		Timestamp stockdate=stockTopic2.getCreatedAt();
+		topic.setCreatedAt(stockdate);
 		return topicrepository.save(topic);
 	}
 

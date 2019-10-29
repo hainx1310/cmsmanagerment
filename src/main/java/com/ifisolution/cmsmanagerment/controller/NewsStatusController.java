@@ -39,12 +39,12 @@ public class NewsStatusController {
 	}
 
 	@PutMapping(value = "/status/{id}")
-	public NewsStatus updateStatus(@RequestBody NewsStatus status, @PathVariable Integer Id) {
-		return statusservice.update(status, Id);
+	public NewsStatus updateStatus(@RequestBody NewsStatus status, @PathVariable Integer id) {
+		return statusservice.update(status, id);
 	}
 
 	@DeleteMapping(value = "/status/{id}")
-	public ResponseEntity deleteStatus(@PathVariable Integer Id) {
-		return statusservice.deleteById(Id);
+	public ResponseEntity deleteStatus(@PathVariable Integer id) {
+		return statusservice.deleteById(id);
 	}
 }

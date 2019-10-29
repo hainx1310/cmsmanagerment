@@ -34,7 +34,7 @@ public class NewsShare {
 	@Column(name = "status")
 	private Boolean status;
 
-	@Temporal(TemporalType.DATE)
+//	@Temporal(TemporalType.DATE)
 	@Column(name = "created_at")
 	private Timestamp createAt;
 

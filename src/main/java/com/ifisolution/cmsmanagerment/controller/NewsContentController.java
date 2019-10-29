@@ -39,12 +39,12 @@ public class NewsContentController {
 	}
 
 	@PutMapping(value = "/content/{id}")
-	public NewsContent updateContent(@RequestBody NewsContent content, @PathVariable Integer Id) {
-		return contentservice.update(content, Id);
+	public NewsContent updateContent(@RequestBody NewsContent content, @PathVariable Integer id) {
+		return contentservice.update(content, id);
 	}
 
 	@DeleteMapping(value = "/content/{id}")
-	public ResponseEntity deleteContent(@PathVariable Integer Id) {
-		return contentservice.deleteById(Id);
+	public ResponseEntity deleteContent(@PathVariable Integer id) {
+		return contentservice.deleteById(id);
 	}
 }
