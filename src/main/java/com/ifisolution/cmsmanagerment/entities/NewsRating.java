@@ -1,5 +1,6 @@
 package com.ifisolution.cmsmanagerment.entities;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -11,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "cms_news_rating")
-public class NewsRating {
+public class NewsRating implements Serializable {
 
 	@Id
 	@Column(name = "id")
@@ -30,6 +31,7 @@ public class NewsRating {
 	private int status;
 	@Column(name = "created_at")
 	private Timestamp createdAt;
+	// @JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "news_id", nullable = false)
 	private NewsHeader newsHeader;
