@@ -3,13 +3,18 @@ package com.ifisolution.cmsmanagerment.services.impl;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.stereotype.Service;
 
 import com.ifisolution.cmsmanagerment.entities.TopicTracking;
 import com.ifisolution.cmsmanagerment.repository.TopicTrackingRepository;
 import com.ifisolution.cmsmanagerment.services.TopicTrackingServices;
-
+@Service
+@Configurable
+@Transactional
 public class TopicTrackingServicesImpl implements TopicTrackingServices {
 
 	@Autowired

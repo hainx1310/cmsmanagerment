@@ -1,5 +1,6 @@
 package com.ifisolution.cmsmanagerment.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "cms_news_status")
-public class NewsStatus {
+public class NewsStatus implements Serializable {
 
 	@Id
 	private int id;
@@ -25,7 +26,7 @@ public class NewsStatus {
 
 	// one to many "cms_news-status"
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "newsStatus")
-	private List<NewsHeader> newsStatus = new ArrayList<>();
+	private List<NewsHeader> listNewsHeader = new ArrayList<>();
 
 	//
 	public int getId() {
@@ -60,13 +61,14 @@ public class NewsStatus {
 		this.desciption = desciption;
 	}
 
-	public List<NewsHeader> getNewsStatus() {
-		return newsStatus;
+	public List<NewsHeader> getListNewsHeader() {
+		return listNewsHeader;
 	}
 
-	public void setNewsStatus(List<NewsHeader> newsStatus) {
-		this.newsStatus = newsStatus;
+	public void setListNewsHeader(List<NewsHeader> listNewsHeader) {
+		this.listNewsHeader = listNewsHeader;
 	}
+
 	
 	
 }
