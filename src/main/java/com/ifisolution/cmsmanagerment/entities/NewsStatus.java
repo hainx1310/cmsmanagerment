@@ -21,7 +21,7 @@ public class NewsStatus implements Serializable {
 	private String code;
 	@Column(name="name")
 	private String name;
-	@Column(name="desciption")
+	@Column(name="description")
 	private String desciption;
 
 	// one to many "cms_news-status"

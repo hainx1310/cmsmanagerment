@@ -1,5 +1,8 @@
 package com.ifisolution.cmsmanagerment.controller;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -55,7 +58,7 @@ public class TopicTrackingController {
 		topicTracking.setTopicName(topicTrackingModel.getTopicName());
 		topicTracking.setSubTopicName(topicTrackingModel.getSubTopicName());
 		topicTracking.setStatus(topicTrackingModel.isStatus());
-		topicTracking.setCreateAt(topicTrackingModel.getCreateAt());
+		topicTracking.setCreateAt(new Timestamp(new Date().getTime()));
 		topicTracking.setDoctorId(topicTrackingModel.getDoctorId());
 		topicTracking.setUserId(topicTrackingModel.getUserId());
 		topicTracking.setTypeMember(topicTrackingModel.getTypeMember());
@@ -78,7 +81,7 @@ public class TopicTrackingController {
 		topicTracking.setTopicName(topicTrackingModel.getTopicName());
 		topicTracking.setSubTopicName(topicTrackingModel.getSubTopicName());
 		topicTracking.setStatus(topicTrackingModel.isStatus());
-		topicTracking.setCreateAt(topicTrackingModel.getCreateAt());
+		topicTracking.setCreateAt(new Timestamp(new Date().getTime()));
 		topicTracking.setDoctorId(topicTrackingModel.getDoctorId());
 		topicTracking.setUserId(topicTrackingModel.getUserId());
 		topicTracking.setTypeMember(topicTrackingModel.getTypeMember());

@@ -24,10 +24,11 @@ public class Topic {
 	@Column(name="parent_ref_id")
 	private int parentRefId;
 
-	@Column(name="create_at")
+	@Column(name="created_at")
 	private Timestamp createdAt;
 
 	// one to many "topic_tracking"
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "topic")
 	private List<TopicTracking> listTopic = new ArrayList<>();
 

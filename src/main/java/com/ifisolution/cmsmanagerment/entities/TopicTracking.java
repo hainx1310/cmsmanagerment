@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "cms_topic_tracking")
 public class TopicTracking {
@@ -19,6 +21,7 @@ public class TopicTracking {
 	@Column(name = "id")
 	private int id;
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name = "topic_id", referencedColumnName = "id")
 	private Topic topic;
 	@Column(name = "topic_name")
@@ -27,7 +30,7 @@ public class TopicTracking {
 	private String subTopicName;
 	@Column(name = "status")
 	private boolean status;
-	@Column(name = "create_at")
+	@Column(name = "created_at")
 	private Timestamp createAt;
 	@Column(name = "doctor_id")
 	private int doctorId;
