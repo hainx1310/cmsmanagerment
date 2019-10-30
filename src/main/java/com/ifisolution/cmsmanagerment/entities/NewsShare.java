@@ -7,12 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "cms_news_share")
 public class NewsShare {
 
 	@Id
@@ -36,6 +34,7 @@ public class NewsShare {
 	@Column(name = "status")
 	private Boolean status;
 
+//	@Temporal(TemporalType.DATE)
 	@Column(name = "created_at")
 	private Timestamp createAt;
 

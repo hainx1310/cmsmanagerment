@@ -3,6 +3,7 @@ package com.ifisolution.cmsmanagerment.services.impl;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class NewsStatusServiceImpl implements NewsStatusService {
 		Integer id = newsStatus.getId();
 		Optional<NewsStatus> newsStatus2 = newsstatusrepository.findById(id);
 		if (newsStatus2.isPresent()) {
-			throw new EntityNotFoundException("Topic id " + id + " has exist");
+			throw new EntityExistsException("Status id " + id + " has exist");
 
 		}
 		return newsstatusrepository.save(newsStatus);
@@ -56,7 +57,7 @@ public class NewsStatusServiceImpl implements NewsStatusService {
 			throw new EntityNotFoundException("Status id " + Id + " not found");
 		}
 		if (idUpdate != Id) {
-			throw new EntityNotFoundException("not change id");
+			throw new EntityExistsException("not change id");
 		}
 		return newsstatusrepository.save(newsStatus);
 	}
