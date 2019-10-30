@@ -2,6 +2,7 @@ package com.ifisolution.cmsmanagerment.entities;
 
 import java.sql.Timestamp;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,7 +44,7 @@ public class NewsComment {
 	@Column(name = "status_publish")
 	private boolean statusPublish;
 
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.REMOVE, CascadeType.PERSIST})
 	@JoinColumn(name = "news_id", referencedColumnName = "id")
 	private NewsHeader newsHeader;
 

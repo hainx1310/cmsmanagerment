@@ -13,4 +13,6 @@ public interface NewsCommentService {
 	NewsComment delete(int id);
 
 	List<NewsComment> getCommentByHeaderId(int id);
+	
+	List<NewsComment> getAll();
 }
