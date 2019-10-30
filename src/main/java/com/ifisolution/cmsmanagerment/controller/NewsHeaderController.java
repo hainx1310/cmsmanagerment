@@ -30,7 +30,7 @@ public class NewsHeaderController {
 	}
 
 	@GetMapping(value = "/{newsHeaderId}")
-	public ResponseEntity<NewsHeader> getNewsHeaderById(int newsHeaderId) {
+	public ResponseEntity<NewsHeader> getNewsHeaderById(@PathVariable("newsHeaderId") int newsHeaderId) {
 		return ResponseEntity.ok(this.newsHeaderServices.getNewsHeaderById(newsHeaderId));
 	}
 

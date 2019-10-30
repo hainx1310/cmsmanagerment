@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "cms_topic")
 public class Topic {
@@ -29,10 +31,12 @@ public class Topic {
 
 	// one to many "topic_tracking"
 	
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "topic")
 	private List<TopicTracking> listTopic = new ArrayList<>();
 
 	// one to many "cms_news_header"
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "topic")
 	private List<NewsHeader> newsHeader = new ArrayList<>();
 

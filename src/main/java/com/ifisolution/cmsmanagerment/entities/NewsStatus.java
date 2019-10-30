@@ -11,20 +11,23 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "cms_news_status")
 public class NewsStatus implements Serializable {
 
 	@Id
 	private int id;
-	@Column(name="code")
+	@Column(name = "code")
 	private String code;
-	@Column(name="name")
+	@Column(name = "name")
 	private String name;
-	@Column(name="description")
+	@Column(name = "description")
 	private String desciption;
 
 	// one to many "cms_news-status"
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "newsStatus")
 	private List<NewsHeader> listNewsHeader = new ArrayList<>();
 
@@ -69,6 +72,4 @@ public class NewsStatus implements Serializable {
 		this.listNewsHeader = listNewsHeader;
 	}
 
-	
-	
 }

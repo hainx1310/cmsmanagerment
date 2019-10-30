@@ -56,6 +56,7 @@ public class NewsHeaderServicesImpl implements NewsHeaderServices {
 		newsHeader.setNumberViewers(newsHeaderDTO.getNumberViewers());
 		newsHeader.setHighlightLevel(newsHeaderDTO.getHighlightLevel());
 		newsHeader.setType(newsHeaderDTO.getType());
+		newsHeader.setCreatedDate(new Timestamp(new Date().getTime()));
 
 		return this.newsHeaderRepository.save(newsHeader);
 	}
@@ -84,6 +85,7 @@ public class NewsHeaderServicesImpl implements NewsHeaderServices {
 		newsHeader.setNumberViewers(newsHeaderDTO.getNumberViewers());
 		newsHeader.setHighlightLevel(newsHeaderDTO.getHighlightLevel());
 		newsHeader.setType(newsHeaderDTO.getType());
+		newsHeader.setLastModifiedDate(new java.sql.Date(new Date().getTime()));
 
 		return this.newsHeaderRepository.save(newsHeader);
 	}

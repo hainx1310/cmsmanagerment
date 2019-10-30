@@ -59,6 +59,7 @@ public class NewsHeader {
 
 	@ManyToOne
 	@JoinColumn(name = "topic_id", referencedColumnName = "id", nullable = false)
+//	@JsonIgnore
 	private Topic topic;
 
 	@JsonIgnore
@@ -71,6 +72,7 @@ public class NewsHeader {
 
 	@ManyToOne
 	@JoinColumn(name = "status", referencedColumnName = "code", nullable = false)
+//	@JsonIgnore
 	private NewsStatus newsStatus;
 
 	@JsonIgnore
