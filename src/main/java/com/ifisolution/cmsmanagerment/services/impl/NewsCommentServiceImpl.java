@@ -1,5 +1,7 @@
 package com.ifisolution.cmsmanagerment.services.impl;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
@@ -17,7 +19,7 @@ import com.ifisolution.cmsmanagerment.services.NewsCommentService;
 
 @Service
 @Configurable
-@Transactional
+//@Transactional
 public class NewsCommentServiceImpl implements NewsCommentService {
 
 	@Autowired
@@ -31,6 +33,7 @@ public class NewsCommentServiceImpl implements NewsCommentService {
 		NewsHeader currentNewsHeader = newsHeaderRepository.findById(newsComment.getNewsHeader().getId())
 				.orElseThrow(() -> new EntityNotFoundException("Not found NewsHeader"));
 		newsComment.setNewsHeader(currentNewsHeader);
+		newsComment.setCreatedAt(new Timestamp(new Date().getTime()));
 		return newsCommentRepository.save(newsComment);
 	}
 
@@ -38,18 +41,17 @@ public class NewsCommentServiceImpl implements NewsCommentService {
 	public NewsComment update(NewsComment newsComment, int id) {
 		NewsComment currentcomment = newsCommentRepository.findById(id)
 				.orElseThrow(() -> new EntityNotFoundException("comment doesn't exist"));
-		currentcomment.setCreatedAt(newsComment.getCreatedAt());
+		NewsHeader currentNewsHeader = newsHeaderRepository.findById(newsComment.getNewsHeader().getId())
+				.orElseThrow(() -> new EntityNotFoundException("Not found NewsHeader"));
 		currentcomment.setDoctorId(newsComment.getDoctorId());
 		currentcomment.setEmail(newsComment.getEmail());
 		currentcomment.setName(newsComment.getName());
-		NewsHeader currentNewsHeader = newsHeaderRepository.findById(newsComment.getNewsHeader().getId())
-				.orElseThrow(() -> new EntityNotFoundException("Not found NewsHeader"));
-		newsComment.setNewsHeader(currentNewsHeader);
+		currentcomment.setNewsHeader(currentNewsHeader);
 		currentcomment.setStatusPublish(newsComment.isStatusPublish());
 		currentcomment.setTypeMember(newsComment.getTypeMember());
 		currentcomment.setUserId(newsComment.getUserId());
-		newsCommentRepository.save(currentcomment);
-		return currentcomment;
+		NewsComment result = newsCommentRepository.save(currentcomment);
+		return result;
 	}
 
 	@Override
@@ -66,6 +68,14 @@ public class NewsCommentServiceImpl implements NewsCommentService {
 			throw new EntityNotFoundException("There are no comments for this article");
 		}
 		return newsCommentRepository.getCommentsByHeaderId(id);
+	}
+
+	@Override
+	public List<NewsComment> getAll() {
+		if(newsCommentRepository.findAll() == null) {
+			throw new EntityNotFoundException("Not found");
+		}
+		return newsCommentRepository.findAll();
 	}
 
 }

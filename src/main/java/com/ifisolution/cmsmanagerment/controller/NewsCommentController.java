@@ -21,7 +21,11 @@ import com.ifisolution.cmsmanagerment.services.NewsCommentService;
 public class NewsCommentController {
 	@Autowired
 	private NewsCommentService newsCommentService;
-
+	
+	@GetMapping(value = "")
+	public ResponseEntity<List<NewsComment>> getAll() {
+		return ResponseEntity.ok(newsCommentService.getAll());
+	}
 	@GetMapping(value = "/comment/{id}")
 	public ResponseEntity<List<NewsComment>> getCommentByHeader(@PathVariable("id") int id) {
 		return ResponseEntity.ok(newsCommentService.getCommentByHeaderId(id));

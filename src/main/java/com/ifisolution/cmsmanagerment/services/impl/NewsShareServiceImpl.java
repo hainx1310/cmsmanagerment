@@ -8,6 +8,7 @@ import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.ifisolution.cmsmanagerment.common.CommonConstant;
 import com.ifisolution.cmsmanagerment.entities.NewsHeader;
 import com.ifisolution.cmsmanagerment.entities.NewsShare;
 import com.ifisolution.cmsmanagerment.repository.NewsHeaderRepository;
@@ -38,7 +39,7 @@ public class NewsShareServiceImpl implements NewsShareServices {
 	public NewsShare create(NewsShare newsShare) {
 		int newsHeaderId = newsShare.getNewsHeader() != null ? newsShare.getNewsHeader().getId() : 0;
 		NewsHeader newsHeader = this.newsHeaderRepository.findById(newsHeaderId)
-				.orElseThrow(() -> new EntityNotFoundException("News Header not found"));
+				.orElseThrow(() -> new EntityNotFoundException(CommonConstant.NEWS_HEADER_NOT_FOUND));
 		newsShare.setNewsHeader(newsHeader);
 		newsShare.setCreateAt(new Timestamp(new Date().getTime()));
 
@@ -48,21 +49,21 @@ public class NewsShareServiceImpl implements NewsShareServices {
 	@Override
 	public NewsShare findByNewsShareId(int id) {
 		NewsShare newShareResult = newsShareRepository.findById(id)
-				.orElseThrow(() -> new EntityNotFoundException("Not found"));
+				.orElseThrow(() -> new EntityNotFoundException(CommonConstant.NEWS_SHARE_NOT_FOUND));
 		return newShareResult;
 	}
 
 	@Override
 	public List<NewsShare> findByNewsHeaderId(int id) {
 		if (newsShareRepository.findNewsSharesByNewsHeaderId(id) == null) {
-			throw new EntityNotFoundException("Not found");
+			throw new EntityNotFoundException(CommonConstant.NEWS_SHARE_NOT_FOUND);
 		}
 		return newsShareRepository.findNewsSharesByNewsHeaderId(id);
 	}
 
 	@Override
 	public void deleteById(int id) {
-		newsShareRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Not found"));
+		newsShareRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(CommonConstant.NEWS_SHARE_NOT_FOUND));
 		newsShareRepository.deleteById(id);
 	}
 
@@ -70,10 +71,10 @@ public class NewsShareServiceImpl implements NewsShareServices {
 	public NewsShare update(int id, NewsShare newsShare) {
 
 		NewsShare newsShareOpt = newsShareRepository.findById(id)
-				.orElseThrow(() -> new EntityNotFoundException("News Share not found"));
+				.orElseThrow(() -> new EntityNotFoundException(CommonConstant.NEWS_SHARE_NOT_FOUND));
 		int newsHeaderId = newsShare.getNewsHeader() != null ? newsShare.getNewsHeader().getId() : 0;
 		NewsHeader newsHeader = this.newsHeaderRepository.findById(newsHeaderId)
-				.orElseThrow(() -> new EntityNotFoundException("News Header not found"));
+				.orElseThrow(() -> new EntityNotFoundException(CommonConstant.NEWS_HEADER_NOT_FOUND));
 
 		newsShareOpt.setFromDoctorId(newsShare.getFromDoctorId());
 		newsShareOpt.setFromUserId(newsShare.getFromUserId());
