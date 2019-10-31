@@ -17,6 +17,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "cms_news_status")
 public class NewsStatus implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	private int id;
 	@Column(name = "code")
