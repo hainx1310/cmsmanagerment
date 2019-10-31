@@ -71,4 +71,15 @@ public class NewsContentServiceImpl implements NewsContentService {
 		return new ResponseEntity<Object>("Content id " + Id + " has been deleted", HttpStatus.OK);
 	}
 
+	@Override
+	public List<NewsContent> findNewsContentsByNewsHeaderId(int headerID) {
+		
+		List<NewsContent> listContents = newsscontentrepository.findNewsContentsByNewsHeaderId(headerID);
+		if(listContents.size()<0) {
+			throw new EntityNotFoundException("Not Found Content by Header Id " + headerID);
+		}
+		return listContents;
+	}
+
+
 }

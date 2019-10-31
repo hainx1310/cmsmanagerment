@@ -15,5 +15,5 @@ public interface NewsStatusService {
 
 	NewsStatus update(NewsStatus newsStatus, Integer Id);
 
-	ResponseEntity deleteById(Integer id);
+	ResponseEntity<Object> deleteById(Integer id);
 }

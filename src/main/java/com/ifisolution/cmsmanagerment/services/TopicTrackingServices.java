@@ -2,6 +2,8 @@ package com.ifisolution.cmsmanagerment.services;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+
 import com.ifisolution.cmsmanagerment.entities.TopicTracking;
 
 public interface TopicTrackingServices {
@@ -11,7 +13,7 @@ public interface TopicTrackingServices {
 
 	TopicTracking insertTopicTracking(TopicTracking tp);
 
-	void deleteTopictracking(int id);
+	ResponseEntity<Object> deleteTopictracking(int id);
 
 	TopicTracking updateTopicTracking(TopicTracking tp);
 }

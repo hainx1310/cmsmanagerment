@@ -44,7 +44,7 @@ public class NewsStatusController {
 	}
 
 	@DeleteMapping(value = "/status/{id}")
-	public ResponseEntity deleteStatus(@PathVariable Integer id) {
+	public ResponseEntity<Object> deleteStatus(@PathVariable Integer id) {
 		return statusservice.deleteById(id);
 	}
 }

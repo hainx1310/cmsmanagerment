@@ -1,14 +1,18 @@
 package com.ifisolution.cmsmanagerment.services.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.ifisolution.cmsmanagerment.entities.NewsContent;
 import com.ifisolution.cmsmanagerment.entities.TopicTracking;
 import com.ifisolution.cmsmanagerment.repository.TopicTrackingRepository;
 import com.ifisolution.cmsmanagerment.services.TopicTrackingServices;
@@ -36,9 +40,13 @@ public class TopicTrackingServicesImpl implements TopicTrackingServices {
 	}
 
 	@Override
-	public void deleteTopictracking(int id) {
+	public ResponseEntity<Object> deleteTopictracking(int id) {
+		Optional<TopicTracking> tracking = topicTrackingRepository.findById(id);
+		if (!tracking.isPresent()) {
+			throw new EntityNotFoundException("Not Found Content with id " + id);
+		}
 		topicTrackingRepository.deleteById(id);
-
+		return new ResponseEntity<Object>("Content id " + id + " has been deleted", HttpStatus.OK);
 	}
 
 	@Override
