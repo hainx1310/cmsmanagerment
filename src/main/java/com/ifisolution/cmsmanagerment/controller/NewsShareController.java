@@ -33,7 +33,7 @@ public class NewsShareController {
 
 	}
 
-	@GetMapping(path = "/get-by-news-header-id/{id}")
+	@GetMapping(path = "/news-header/{id}")
 	public ResponseEntity<List<NewsShare>> findByNewsHeaderId(@PathVariable int id){
 		return ResponseEntity.ok(newsShareService.findByNewsHeaderId(id));
 	}

@@ -19,7 +19,7 @@ public class HandlerException {
 	public ResponseEntity<Object> handleNotFoundException(EntityExistsException eee) {
 		return builResponseException(new ResponseException(eee, HttpStatus.CONFLICT));
 	}
-
+	
 	public ResponseEntity<Object> builResponseException(ResponseException re) {
 		return new ResponseEntity<>(re, re.getStatus());
 	}
