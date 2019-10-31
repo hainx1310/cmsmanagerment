@@ -16,4 +16,8 @@ public interface NewsHeaderServices {
 	List<NewsHeader> getAllNewsHeader();
 
 	NewsHeader getNewsHeaderById(int newsHeaderId);
+
+	List<NewsHeader> findNewsHeadersByTopicId(int topicId);
+
+	List<NewsHeader> findNewsHeadersByNewsStatusCode(String statusCode);
 }

@@ -108,4 +108,19 @@ public class NewsHeaderServicesImpl implements NewsHeaderServices {
 				.orElseThrow(() -> new EntityNotFoundException(CommonConstant.NEWS_HEADER_NOT_FOUND));
 	}
 
+	@Override
+	public List<NewsHeader> findNewsHeadersByTopicId(int topicId) {
+		this.topicRepository.findById(topicId)
+				.orElseThrow(() -> new EntityNotFoundException(CommonConstant.TOPIC_NOT_FOUND));
+		return this.newsHeaderRepository.findNewsHeadersByTopicId(topicId);
+	}
+
+	@Override
+	public List<NewsHeader> findNewsHeadersByNewsStatusCode(String statusCode) {
+		if (this.newsStatusRepository.findNewsStatusByCode(statusCode) == null) {
+			throw new EntityNotFoundException(CommonConstant.NEWS_STATUS_NOT_FOUND);
+		}
+		return this.newsHeaderRepository.findNewsHeadersByNewsStatusCode(statusCode);
+	}
+
 }
