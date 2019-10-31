@@ -3,6 +3,7 @@ package com.ifisolution.cmsmanagerment.services.impl;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -55,6 +56,8 @@ public class NewsShareServiceImpl implements NewsShareServices {
 
 	@Override
 	public List<NewsShare> findByNewsHeaderId(int id) {
+		newsHeaderRepository.findById(id)
+				.orElseThrow(() -> new NoSuchElementException(CommonConstant.NEWS_HEADER_NOT_FOUND));
 		if (newsShareRepository.findNewsSharesByNewsHeaderId(id) == null) {
 			throw new EntityNotFoundException(CommonConstant.NEWS_SHARE_NOT_FOUND);
 		}
@@ -63,7 +66,8 @@ public class NewsShareServiceImpl implements NewsShareServices {
 
 	@Override
 	public void deleteById(int id) {
-		newsShareRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(CommonConstant.NEWS_SHARE_NOT_FOUND));
+		newsShareRepository.findById(id)
+				.orElseThrow(() -> new EntityNotFoundException(CommonConstant.NEWS_SHARE_NOT_FOUND));
 		newsShareRepository.deleteById(id);
 	}
 
