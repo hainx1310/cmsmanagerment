@@ -2,6 +2,8 @@ package com.ifisolution.cmsmanagerment.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,13 +37,13 @@ public class NewsHeaderController {
 	}
 
 	@PostMapping(value = "")
-	public ResponseEntity<NewsHeader> createNewsHeader(@RequestBody NewsHeaderDTO newsHeaderDTO) {
+	public ResponseEntity<NewsHeader> createNewsHeader(@Valid @RequestBody NewsHeaderDTO newsHeaderDTO) {
 		return ResponseEntity.ok(this.newsHeaderServices.createNewsHeader(newsHeaderDTO));
 	}
 
 	@PutMapping(value = "/{newsHeaderId}")
 	public ResponseEntity<NewsHeader> updateNewsHeader(@PathVariable("newsHeaderId") int newsHeaderId,
-			@RequestBody NewsHeaderDTO newsHeaderDTO) {
+			@Valid @RequestBody NewsHeaderDTO newsHeaderDTO) {
 		return ResponseEntity.ok(this.newsHeaderServices.updateNewsHeader(newsHeaderId, newsHeaderDTO));
 	}
 
