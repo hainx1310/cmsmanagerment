@@ -46,7 +46,7 @@ public class NewsCommentServiceImpl implements NewsCommentService {
 		currentcomment.setDoctorId(newsComment.getDoctorId());
 		currentcomment.setEmail(newsComment.getEmail());
 		currentcomment.setName(newsComment.getName());
-		newsComment.setNewsHeader(currentNewsHeader);
+		currentcomment.setNewsHeader(currentNewsHeader);
 		currentcomment.setStatusPublish(newsComment.isStatusPublish());
 		currentcomment.setTypeMember(newsComment.getTypeMember());
 		currentcomment.setUserId(newsComment.getUserId());
