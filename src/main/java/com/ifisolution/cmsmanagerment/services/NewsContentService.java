@@ -15,5 +15,8 @@ public interface NewsContentService {
 
 	NewsContent update(NewsContent newsContent, Integer Id);
 
-	ResponseEntity deleteById(Integer id);
+	ResponseEntity<Object> deleteById(Integer id);
+	
+	List<NewsContent> findNewsContentsByNewsHeaderId(int headerID);
+	
 }

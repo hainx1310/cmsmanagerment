@@ -43,7 +43,7 @@ public class TopicController {
 	}
 
 	@DeleteMapping(value = "/topic/{id}")
-	public ResponseEntity deleteTopic(@PathVariable Integer id) {
+	public ResponseEntity<Object> deleteTopic(@PathVariable Integer id) {
 		return topicservice.deleteById(id);
 	}
 }

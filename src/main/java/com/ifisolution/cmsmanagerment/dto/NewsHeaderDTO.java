@@ -3,17 +3,43 @@ package com.ifisolution.cmsmanagerment.dto;
 import java.sql.Date;
 import java.sql.Timestamp;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+
 public class NewsHeaderDTO {
 
 	private int id;
+
+	@NotEmpty(message = "tittle may not be empty")
+	@Length(max = 255, message = "title max 255 key word")
 	private String title;
+
+	@NotEmpty(message = "summary may not be empty")
+	@Length(max = 255, message = "summary max 255 key word")
 	private String image;
+
+	@NotEmpty(message = "summary may not be empty")
+	@Length(max = 255, message = "summary max 255 key word")
 	private String video;
+
+	@NotEmpty(message = "summary may not be empty")
+	@Length(max = 255, message = "summary max 255 key word")
 	private String summary;
+
 	private Timestamp createdDate;
-	private int topicId;
-	private int authorId;
+
+	@NotNull(message = "topicId may not be empty")
+	private Integer topicId;
+
+	@NotNull(message = "authorId may not be empty")
+	private Integer authorId;
+
+	@NotEmpty(message = "status may not be empty")
+	@Length(max = 255, message = "status max 255 key word")
 	private String status;
+
 	private int numberViewers;
 	private String highlightLevel;
 	private String type;

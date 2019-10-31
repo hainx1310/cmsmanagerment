@@ -17,4 +17,6 @@ public interface NewsShareServices {
 	public void deleteById(int id);
 
 	public NewsShare update(int id, NewsShare newsShare);
+	//lay ds newsShare cua headerId
+	public Integer countNewsHeaderId(int id);
 }

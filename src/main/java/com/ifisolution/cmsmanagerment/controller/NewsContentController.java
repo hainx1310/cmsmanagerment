@@ -44,7 +44,12 @@ public class NewsContentController {
 	}
 
 	@DeleteMapping(value = "/content/{id}")
-	public ResponseEntity deleteContent(@PathVariable Integer id) {
+	public ResponseEntity<Object> deleteContent(@PathVariable Integer id) {
 		return contentservice.deleteById(id);
+	}
+
+	@GetMapping(value = "/content/header/{id}")
+	public List<NewsContent> getContentByIdHeader(@PathVariable int id) {
+		return contentservice.findNewsContentsByNewsHeaderId(id);
 	}
 }

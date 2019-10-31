@@ -16,5 +16,5 @@ public interface TopicService {
 
 	Topic updateTopic(Topic topic, Integer Id);
 
-	ResponseEntity deleteById(Integer id);
+	ResponseEntity<Object> deleteById(Integer id);
 }
