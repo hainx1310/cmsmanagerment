@@ -38,6 +38,10 @@ public class NewsShareController {
 		return ResponseEntity.ok(newsShareService.findByNewsHeaderId(id));
 	}
 
+	@GetMapping(path="/count-news-header/{id}")
+	public ResponseEntity<Integer> countNewsHeaderId(@PathVariable int id){
+		return ResponseEntity.ok(newsShareService.countNewsHeaderId(id));
+	}
 	@DeleteMapping(path = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable int id){
 		newsShareService.deleteById(id);

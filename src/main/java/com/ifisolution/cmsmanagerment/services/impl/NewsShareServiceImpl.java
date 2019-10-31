@@ -91,4 +91,15 @@ public class NewsShareServiceImpl implements NewsShareServices {
 
 		return this.newsShareRepository.save(newsShareOpt);
 	}
+
+	@Override
+	public Integer countNewsHeaderId(int id) {
+		newsHeaderRepository.findById(id)
+		.orElseThrow(() -> new NoSuchElementException(CommonConstant.NEWS_HEADER_NOT_FOUND));
+		List<NewsShare> lstNewsShare = newsShareRepository.findNewsSharesByNewsHeaderId(id);
+		if(lstNewsShare.size() == 0) {
+			throw new EntityNotFoundException(CommonConstant.NEWS_SHARE_NOT_FOUND);
+		}
+		return lstNewsShare.size();
+	}
 }
