@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ifisolution.cmsmanagerment.entities.NewsHeader;
 import com.ifisolution.cmsmanagerment.entities.NewsRating;
 import com.ifisolution.cmsmanagerment.services.NewsRatingService;
 
@@ -51,5 +52,12 @@ public class NewsRatingController {
 	public ResponseEntity<Object> delete(@PathVariable int id) {
 		ResponseEntity<Object> respone = newsRatingService.delete(id);
 		return respone;
+	}
+
+	@GetMapping("/{id}/news-header")
+	public ResponseEntity<Object> getNewsHeaderByNewsRatingId(@PathVariable int id) {
+		NewsHeader newsHeader = newsRatingService.getNewsHeaderByNewsRatingId(id);
+		return new ResponseEntity<Object>(newsHeader, HttpStatus.OK);
+
 	}
 }

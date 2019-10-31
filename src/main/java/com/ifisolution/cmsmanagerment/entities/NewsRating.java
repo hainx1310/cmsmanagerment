@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "cms_news_rating")
 public class NewsRating implements Serializable {
@@ -31,7 +33,7 @@ public class NewsRating implements Serializable {
 	private int status;
 	@Column(name = "created_at")
 	private Timestamp createdAt;
-	// @JsonIgnore
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "news_id", nullable = false)
 	private NewsHeader newsHeader;

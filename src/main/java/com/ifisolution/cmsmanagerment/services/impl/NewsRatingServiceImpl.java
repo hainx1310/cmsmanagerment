@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.ifisolution.cmsmanagerment.entities.NewsHeader;
 import com.ifisolution.cmsmanagerment.entities.NewsRating;
 import com.ifisolution.cmsmanagerment.repository.NewsRatingRepository;
 import com.ifisolution.cmsmanagerment.services.NewsRatingService;
@@ -59,6 +60,15 @@ public class NewsRatingServiceImpl implements NewsRatingService {
 			newsRatingRepository.deleteById(id);
 			return new ResponseEntity<Object>("delete NewsRating id: " + id + " successfully", HttpStatus.ACCEPTED);
 		}
+	}
+
+	@Override
+	public NewsHeader getNewsHeaderByNewsRatingId(int newsRatingId) {
+		NewsRating newsRating = this.getById(newsRatingId);
+		if (newsRating == null) {
+			throw new EntityNotFoundException("not found NewsRating with id: " + newsRatingId);
+		} else
+			return newsRating.getNewsId();
 	}
 
 }

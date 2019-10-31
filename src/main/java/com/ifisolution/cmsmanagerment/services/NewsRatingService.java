@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
+import com.ifisolution.cmsmanagerment.entities.NewsHeader;
 import com.ifisolution.cmsmanagerment.entities.NewsRating;
 
 public interface NewsRatingService {
@@ -16,4 +17,6 @@ public interface NewsRatingService {
 	public List<NewsRating> getAll();
 
 	public ResponseEntity<Object> delete(int id);
+
+	public NewsHeader getNewsHeaderByNewsRatingId(int newsRatingId);
 }
