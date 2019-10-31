@@ -60,4 +60,11 @@ public class NewsRatingController {
 		return new ResponseEntity<Object>(newsHeader, HttpStatus.OK);
 
 	}
+
+	@GetMapping("/news-header/{id}")
+	public ResponseEntity<Object> findNewsRatingByNewsHeaderId(@PathVariable int id) {
+		List<NewsRating> newsRatings = newsRatingService.findNewsRatingsByNewsHeaderId(id);
+		return new ResponseEntity<Object>(newsRatings, HttpStatus.OK);
+
+	}
 }

@@ -71,4 +71,10 @@ public class NewsRatingServiceImpl implements NewsRatingService {
 			return newsRating.getNewsId();
 	}
 
+	@Override
+	public List<NewsRating> findNewsRatingsByNewsHeaderId(int newsHeaderId) {
+		List<NewsRating> newsRatings = newsRatingRepository.findNewsRatingsByNewsHeaderId(newsHeaderId);
+		return newsRatings;
+	}
+
 }

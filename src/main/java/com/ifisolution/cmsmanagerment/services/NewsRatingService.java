@@ -19,4 +19,6 @@ public interface NewsRatingService {
 	public ResponseEntity<Object> delete(int id);
 
 	public NewsHeader getNewsHeaderByNewsRatingId(int newsRatingId);
+
+	public List<NewsRating> findNewsRatingsByNewsHeaderId(int newsHeaderId);
 }
