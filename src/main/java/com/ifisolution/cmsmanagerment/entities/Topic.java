@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -21,9 +22,11 @@ public class Topic {
 	private int id;
 
 	@Column(name="name")
+	@NotEmpty(message = "name not be empty")
 	private String name;
 
 	@Column(name="parent_ref_id")
+	@NotEmpty(message = "parent ref id not be empty")
 	private int parentRefId;
 
 	@Column(name="created_at")

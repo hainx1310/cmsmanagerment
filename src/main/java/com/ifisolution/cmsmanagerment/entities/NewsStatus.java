@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -21,11 +22,18 @@ public class NewsStatus implements Serializable {
 	
 	@Id
 	private int id;
+	
 	@Column(name = "code")
+	@NotEmpty(message = "code not be empty")
 	private String code;
+	
 	@Column(name = "name")
+	@NotEmpty(message = "name not be empty")
 	private String name;
+	
 	@Column(name = "description")
+	@NotEmpty(message = "description not be empty")
+
 	private String desciption;
 
 	// one to many "cms_news-status"

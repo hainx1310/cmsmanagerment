@@ -6,19 +6,21 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "cms_news_content")
 public class NewsContent {
 	@Id
 	private int id;
+	
 	@Column(name="content")
+	@NotEmpty(message = "content not be empty")
 	private String content;
-	@Column(name="news_id")
-	private int newsId;
+
 	// many to one
 	@ManyToOne()
-	@JoinColumn(name = "news_id", referencedColumnName = "id", insertable = false, updatable = false)
+	@JoinColumn(name = "news_id", referencedColumnName = "id")
 	private NewsHeader newsHeader;
 
 	public int getId() {
@@ -37,11 +39,13 @@ public class NewsContent {
 		this.content = content;
 	}
 
-	public int getNewsId() {
-		return newsId;
+	public NewsHeader getNewsHeader() {
+		return newsHeader;
 	}
 
-	public void setNewsId(int newId) {
-		this.newsId = newId;
+	public void setNewsHeader(NewsHeader newsHeader) {
+		this.newsHeader = newsHeader;
 	}
+	
+	
 }
