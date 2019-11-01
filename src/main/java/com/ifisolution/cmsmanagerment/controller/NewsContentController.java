@@ -19,7 +19,7 @@ import com.ifisolution.cmsmanagerment.entities.NewsContent;
 import com.ifisolution.cmsmanagerment.services.NewsContentService;
 
 @RestController
-@RequestMapping("/duy")
+@RequestMapping("/api")
 public class NewsContentController {
 
 	@Autowired
@@ -50,7 +50,7 @@ public class NewsContentController {
 		return contentservice.deleteById(id);
 	}
 
-	@GetMapping(value = "/content/header/{id}")
+	@GetMapping(value = "/content/news-header/{id}")
 	public List<NewsContent> getContentByIdHeader(@PathVariable int id) {
 		return contentservice.findNewsContentsByNewsHeaderId(id);
 	}
