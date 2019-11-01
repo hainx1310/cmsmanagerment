@@ -1,5 +1,7 @@
 package com.ifisolution.cmsmanagerment.services.impl;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityExistsException;
@@ -25,8 +27,10 @@ public class NewsRatingServiceImpl implements NewsRatingService {
 		NewsRating newsRatingTemp = this.getById(newsRating.getId());
 		if (newsRatingTemp != null) {
 			throw new EntityExistsException("this NewsRating already exist!");
-		} else
+		} else {
+			newsRating.setCreateAt(new Timestamp(new Date().getTime()));
 			return newsRatingRepository.save(newsRating);
+		}
 	}
 
 	@Override
@@ -37,8 +41,8 @@ public class NewsRatingServiceImpl implements NewsRatingService {
 	}
 
 	@Override
-	public NewsRating update(NewsRating newsRating) {
-		NewsRating newsRatingTemp = this.getById(newsRating.getId());
+	public NewsRating update(int id, NewsRating newsRating) {
+		NewsRating newsRatingTemp = this.getById(id);
 		if (newsRatingTemp == null) {
 			throw new EntityNotFoundException("not found NewsRating with id: " + newsRating.getId());
 		} else

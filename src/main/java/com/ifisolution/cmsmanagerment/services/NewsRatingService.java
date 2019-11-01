@@ -12,7 +12,7 @@ public interface NewsRatingService {
 
 	public NewsRating getById(int id);
 
-	public NewsRating update(NewsRating newsRating);
+	public NewsRating update(int id, NewsRating newsRating);
 
 	public List<NewsRating> getAll();
 

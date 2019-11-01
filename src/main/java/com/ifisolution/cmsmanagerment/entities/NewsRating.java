@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -17,20 +19,21 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class NewsRating implements Serializable {
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "id", nullable = false)
 	private int id;
-	@Column(name = "doctor_id")
+	@Column(name = "doctor_id", nullable = false)
 	private int doctorId;
-	@Column(name = "user_id")
+	@Column(name = "user_id", nullable = false)
 	private int userId;
-	@Column(name = "type_member")
+	@Column(name = "type_member", nullable = false)
 	private String typeMember;
-	@Column(name = "name")
+	@Column(name = "name", nullable = false, length = 255)
 	private String name;
-	@Column(name = "email")
+	@Column(name = "email", length = 255)
 	private String email;
 	@Column(name = "status")
 	private int status;
+	@CreationTimestamp
 	@Column(name = "created_at")
 	private Timestamp createdAt;
 	@JsonIgnore
