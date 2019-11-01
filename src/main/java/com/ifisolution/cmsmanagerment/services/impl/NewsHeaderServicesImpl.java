@@ -46,16 +46,9 @@ public class NewsHeaderServicesImpl implements NewsHeaderServices {
 		}
 
 		NewsHeader newsHeader = new NewsHeader();
-		newsHeader.setTitle(newsHeaderDTO.getTitle());
-		newsHeader.setImage(newsHeaderDTO.getImage());
-		newsHeader.setVideo(newsHeaderDTO.getVideo());
-		newsHeader.setSummary(newsHeaderDTO.getSummary());
+		this.NewsHeaderDtoToNewsHeader(newsHeaderDTO, newsHeader);
 		newsHeader.setTopic(topic);
-		newsHeader.setAuthorId(newsHeaderDTO.getAuthorId());
 		newsHeader.setNewsStatus(newsStatus);
-		newsHeader.setNumberViewers(newsHeaderDTO.getNumberViewers());
-		newsHeader.setHighlightLevel(newsHeaderDTO.getHighlightLevel());
-		newsHeader.setType(newsHeaderDTO.getType());
 		newsHeader.setCreatedDate(new Timestamp(new Date().getTime()));
 
 		return this.newsHeaderRepository.save(newsHeader);
@@ -75,16 +68,9 @@ public class NewsHeaderServicesImpl implements NewsHeaderServices {
 			throw new EntityNotFoundException(CommonConstant.NEWS_STATUS_NOT_FOUND);
 		}
 
-		newsHeader.setTitle(newsHeaderDTO.getTitle());
-		newsHeader.setImage(newsHeaderDTO.getImage());
-		newsHeader.setVideo(newsHeaderDTO.getVideo());
-		newsHeader.setSummary(newsHeaderDTO.getSummary());
+		this.NewsHeaderDtoToNewsHeader(newsHeaderDTO, newsHeader);
 		newsHeader.setTopic(topic);
-		newsHeader.setAuthorId(newsHeaderDTO.getAuthorId());
 		newsHeader.setNewsStatus(newsStatus);
-		newsHeader.setNumberViewers(newsHeaderDTO.getNumberViewers());
-		newsHeader.setHighlightLevel(newsHeaderDTO.getHighlightLevel());
-		newsHeader.setType(newsHeaderDTO.getType());
 		newsHeader.setLastModifiedDate(new java.sql.Date(new Date().getTime()));
 
 		return this.newsHeaderRepository.save(newsHeader);
@@ -123,4 +109,14 @@ public class NewsHeaderServicesImpl implements NewsHeaderServices {
 		return this.newsHeaderRepository.findNewsHeadersByNewsStatusCode(statusCode);
 	}
 
+	private void NewsHeaderDtoToNewsHeader(NewsHeaderDTO newsHeaderDTO, NewsHeader newsHeader) {
+		newsHeader.setTitle(newsHeaderDTO.getTitle());
+		newsHeader.setImage(newsHeaderDTO.getImage());
+		newsHeader.setVideo(newsHeaderDTO.getVideo());
+		newsHeader.setSummary(newsHeaderDTO.getSummary());
+		newsHeader.setAuthorId(newsHeaderDTO.getAuthorId());
+		newsHeader.setNumberViewers(newsHeaderDTO.getNumberViewers());
+		newsHeader.setHighlightLevel(newsHeaderDTO.getHighlightLevel());
+		newsHeader.setType(newsHeaderDTO.getType());
+	}
 }
