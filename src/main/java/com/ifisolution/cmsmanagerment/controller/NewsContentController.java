@@ -2,6 +2,8 @@ package com.ifisolution.cmsmanagerment.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,7 +19,7 @@ import com.ifisolution.cmsmanagerment.entities.NewsContent;
 import com.ifisolution.cmsmanagerment.services.NewsContentService;
 
 @RestController
-@RequestMapping("/duy")
+@RequestMapping("/api")
 public class NewsContentController {
 
 	@Autowired
@@ -34,12 +36,12 @@ public class NewsContentController {
 	}
 
 	@PostMapping(value = "/content")
-	public NewsContent postContent(@RequestBody NewsContent content) {
+	public NewsContent postContent(@Valid @RequestBody NewsContent content) {
 		return contentservice.save(content);
 	}
 
 	@PutMapping(value = "/content/{id}")
-	public NewsContent updateContent(@RequestBody NewsContent content, @PathVariable Integer id) {
+	public NewsContent updateContent(@Valid @RequestBody NewsContent content, @PathVariable Integer id) {
 		return contentservice.update(content, id);
 	}
 
@@ -48,7 +50,7 @@ public class NewsContentController {
 		return contentservice.deleteById(id);
 	}
 
-	@GetMapping(value = "/content/header/{id}")
+	@GetMapping(value = "/content/news-header/{id}")
 	public List<NewsContent> getContentByIdHeader(@PathVariable int id) {
 		return contentservice.findNewsContentsByNewsHeaderId(id);
 	}

@@ -17,7 +17,7 @@ import com.ifisolution.cmsmanagerment.entities.Topic;
 import com.ifisolution.cmsmanagerment.services.TopicService;
 
 @RestController
-@RequestMapping("/duy")
+@RequestMapping("/api")
 public class TopicController {
 	@Autowired
 	private TopicService topicservice;

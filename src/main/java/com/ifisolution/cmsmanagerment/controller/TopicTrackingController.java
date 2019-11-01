@@ -27,7 +27,7 @@ public class TopicTrackingController {
 	@Autowired
 	TopicService topicServiceImpl;
 
-	@RequestMapping(value = "/topictracking/{id}", //
+	@RequestMapping(value = "topic/topic-tracking/{id}", //
 			method = RequestMethod.GET, //
 			produces = { MediaType.APPLICATION_JSON_VALUE, //
 					MediaType.APPLICATION_XML_VALUE })
@@ -36,7 +36,7 @@ public class TopicTrackingController {
 		return topicTrackingServices.findByID(id);
 	}
 
-	@RequestMapping(value = "/topictracking/{id}", //
+	@RequestMapping(value = "topic/topic-tracking/{id}", //
 			method = RequestMethod.DELETE, //
 			produces = { MediaType.APPLICATION_JSON_VALUE, //
 					MediaType.APPLICATION_XML_VALUE })
@@ -45,7 +45,7 @@ public class TopicTrackingController {
 		topicTrackingServices.deleteTopictracking(id);
 	}
 
-	@RequestMapping(value = "/topictracking", //
+	@RequestMapping(value = "topic/topic-tracking", //
 			method = RequestMethod.POST, //
 			produces = { MediaType.APPLICATION_JSON_VALUE, //
 					MediaType.APPLICATION_XML_VALUE })
@@ -67,7 +67,7 @@ public class TopicTrackingController {
 		topicTrackingServices.insertTopicTracking(topicTracking);
 	}
 
-	@RequestMapping(value = "/topictracking", //
+	@RequestMapping(value = "topic/topic-tracking", //
 			method = RequestMethod.PUT, //
 			produces = { MediaType.APPLICATION_JSON_VALUE, //
 					MediaType.APPLICATION_XML_VALUE })

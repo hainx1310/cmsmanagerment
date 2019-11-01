@@ -17,7 +17,7 @@ import com.ifisolution.cmsmanagerment.entities.NewsStatus;
 import com.ifisolution.cmsmanagerment.services.NewsStatusService;
 
 @RestController
-@RequestMapping("/duy")
+@RequestMapping("/api")
 public class NewsStatusController {
 	
 	@Autowired
