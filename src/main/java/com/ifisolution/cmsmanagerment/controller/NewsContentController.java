@@ -2,6 +2,8 @@ package com.ifisolution.cmsmanagerment.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,12 +36,12 @@ public class NewsContentController {
 	}
 
 	@PostMapping(value = "/content")
-	public NewsContent postContent(@RequestBody NewsContent content) {
+	public NewsContent postContent(@Valid @RequestBody NewsContent content) {
 		return contentservice.save(content);
 	}
 
 	@PutMapping(value = "/content/{id}")
-	public NewsContent updateContent(@RequestBody NewsContent content, @PathVariable Integer id) {
+	public NewsContent updateContent(@Valid @RequestBody NewsContent content, @PathVariable Integer id) {
 		return contentservice.update(content, id);
 	}
 
